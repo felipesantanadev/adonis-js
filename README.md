@@ -12,7 +12,16 @@ This is a simple Adonis API server which implements the following features:
 
 ## Running the application
 
-Clone the repo and run `npm install`. After this you will be able to run the API by using the `adonis serve --dev` command.
+1. Clone the repository
+2. Run `npm install` from the project folder
+3. Install Docker >=17.0 if you have not done it yet
+4. Run `docker-compose up -d` from the `docker` folder (the PostgreSQL and the PgAdmin containers will up)
+5. Create a database called *adonisjs* in PostgreSQL
+6. Create a *.env* file based on the *.env.example* file
+7. Install Adonis globally by running `npm i -g @adonisjs/cli`
+8. Run `adonis migration:run`
+9. Run the `adonis serve --dev`
+10. The server will listen on `http://localhost:3333`
 
 
 ## Testing the application
@@ -21,7 +30,7 @@ Use the following routes to test the application:
 
 ### Create User
 ```
-POST /account/register
+POST /api/v1/account/register
 {
     "email: "test@mail.com",
     "username": "my_username",
@@ -32,7 +41,7 @@ POST /account/register
 ### Login
 
 ```
-POST /account/login
+POST /api/v1/account/login
 {
     "email: "test@mail.com",
     "password": "my_password
@@ -48,7 +57,7 @@ RESPONSE
 
 ### Create Post
 ```
-POST /posts/create
+POST /api/v1/posts/create
 
 HEADER
 Authorization: bearer USER_JWT_TOKEN
@@ -61,7 +70,7 @@ BODY
 
 ### Get Post
 ```
-GET /posts/:id
+GET /api/v1/posts/:id
 
 HEADER
 Authorization: bearer USER_JWT_TOKEN
@@ -69,7 +78,7 @@ Authorization: bearer USER_JWT_TOKEN
 
 ### Get Posts
 ```
-POST /posts
+POST /api/v1/posts
 
 HEADER
 Authorization: bearer USER_JWT_TOKEN
@@ -77,7 +86,7 @@ Authorization: bearer USER_JWT_TOKEN
 
 ### Delete Post
 ```
-POST /posts/:id/delete
+POST /api/v1/posts/:id/delete
 
 HEADER
 Authorization: bearer USER_JWT_TOKEN
