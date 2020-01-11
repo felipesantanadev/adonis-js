@@ -2,7 +2,7 @@
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+This is a simple Adonis API server which implements the following features:
 
 1. Bodyparser
 2. Authentication
@@ -10,21 +10,75 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 4. Lucid ORM
 5. Migrations and seeds
 
-## Setup
+## Running the application
 
-Use the adonis command to install the blueprint
+Clone the repo and run `npm install`. After this you will be able to run the API by using the `adonis serve --dev` command.
 
-```bash
-adonis new yardstick --api-only
+
+## Testing the application
+
+Use the following routes to test the application:
+
+### Create User (/account/create)
+```
+POST /account/register
+{
+    "email: "test@mail.com",
+    "username": "my_username",
+    "password": "my_password
+}
 ```
 
-or manually clone the repo and then run `npm install`.
+### Login (/account/login)
 
+```
+POST /account/login
+{
+    "email: "test@mail.com",
+    "password": "my_password
+}
 
-### Migrations
+RESPONSE
+{
+  "type": "bearer",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3ODcxNDE0MX0.F0eM7WsO8aQk-XrLL8s-0Jv6iFNgQ1PUnYGgaWithSc",
+  "refreshToken": null
+}
+```
 
-Run the following command to run startup migrations.
+### Create Post (/posts/create)
+```
+POST /posts/create
 
-```js
-adonis migration:run
+HEADER
+Authorization: bearer USER_JWT_TOKEN
+
+BODY
+{
+	"title": "The Second Post"
+}
+```
+
+### Get Post (/posts/:id)
+```
+GET /posts/:id
+
+HEADER
+Authorization: bearer USER_JWT_TOKEN
+```
+
+### Get Posts (/posts)
+```
+POST /posts
+
+HEADER
+Authorization: bearer USER_JWT_TOKEN
+```
+
+### Delete Post (/posts/:id/delete)
+```
+POST /posts/:id/delete
+
+HEADER
+Authorization: bearer USER_JWT_TOKEN
 ```
