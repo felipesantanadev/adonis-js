@@ -21,5 +21,8 @@ Route.group(() => {
   Route.post('/account/login', 'AccountController.login');
   Route.get('/account', "AccountController.index").middleware(['auth']);
 
+  Route.get('/posts', "PostController.index").middleware(['auth']);
   Route.post('/posts/create', "PostController.create").middleware(['auth']);
+  Route.get('/posts/:id', "PostController.show").middleware(['auth']);
+  Route.post('/posts/:id/delete', "PostController.destroy").middleware(['auth']);
 }).prefix('api/v1')

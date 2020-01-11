@@ -8,29 +8,36 @@ const Post = use('App/Models/Post');
 
 class PostController {
 
+  async index({request}) {
+    // eager loading
+    return await Post.query()
+                     .with('user')
+                     .fetch();
+  }
+
   async create ({ request, auth }) {
-    const post = new Post(auth.user.id, request.only(['title']));
+    const data = request.only(['title']);
     const result = await Post.create({
       'user_id': auth.user.id,
-      'title': request.only(['title'])
+      ...data
     });
 
     return result;
   }
 
-  async store ({ request, response }) {
+  async show ({ params }) {
+    console.log(params.id);
+    const post = await Post.findOrFail(params.id);
+    return post;
   }
 
-  async show ({ params, request, response, view }) {
-  }
 
-  async edit ({ params, request, response, view }) {
-  }
-
-  async update ({ params, request, response }) {
-  }
-
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, auth, response }) {
+    const post = await Post.findOrFail(params.id);
+    if(post.user_id != auth.user.id) {
+      return response.status(401);
+    }
+    return post.delete();
   }
 }
 
