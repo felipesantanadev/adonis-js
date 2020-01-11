@@ -20,4 +20,6 @@ Route.group(() => {
   Route.post('/account/register', 'AccountController.register');
   Route.post('/account/login', 'AccountController.login');
   Route.get('/account', "AccountController.index").middleware(['auth']);
+
+  Route.post('/posts/create', "PostController.create").middleware(['auth']);
 }).prefix('api/v1')
