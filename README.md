@@ -19,7 +19,7 @@ Clone the repo and run `npm install`. After this you will be able to run the API
 
 Use the following routes to test the application:
 
-### Create User (/account/create)
+### Create User
 ```
 POST /account/register
 {
@@ -29,7 +29,7 @@ POST /account/register
 }
 ```
 
-### Login (/account/login)
+### Login
 
 ```
 POST /account/login
@@ -46,7 +46,7 @@ RESPONSE
 }
 ```
 
-### Create Post (/posts/create)
+### Create Post
 ```
 POST /posts/create
 
@@ -55,11 +55,11 @@ Authorization: bearer USER_JWT_TOKEN
 
 BODY
 {
-	"title": "The Second Post"
+	"title": "The First Post"
 }
 ```
 
-### Get Post (/posts/:id)
+### Get Post
 ```
 GET /posts/:id
 
@@ -67,7 +67,7 @@ HEADER
 Authorization: bearer USER_JWT_TOKEN
 ```
 
-### Get Posts (/posts)
+### Get Posts
 ```
 POST /posts
 
@@ -75,7 +75,7 @@ HEADER
 Authorization: bearer USER_JWT_TOKEN
 ```
 
-### Delete Post (/posts/:id/delete)
+### Delete Post
 ```
 POST /posts/:id/delete
 
